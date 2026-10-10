@@ -1,0 +1,63 @@
+# Tomcat配置项
+server:
+  port: 8082
+  servlet:
+    context-path: /polymer-gen
+
+# spring配置项
+spring:
+  application:
+    name: polymer-gen
+  datasource:
+    # MySQL
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/polymer-gen?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+    # Oracle
+    #    driver-class-name: oracle.jdbc.OracleDriver
+    #    url: jdbc:oracle:thin:@localhost:1521:xe
+    #    username: maku_generator
+    #    password: maku_generator
+    # SQLServer
+    #    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    #    url: jdbc:sqlserver://localhost:1433;DatabaseName=maku_generator;encrypt=true;trustServerCertificate=true
+    #    username: sa
+    #    password: 123456@maku
+    # postgresql
+    #    driver-class-name: org.postgresql.Driver
+    #    url: jdbc:postgresql://localhost:5432/postgres
+    #    username: postgres
+    #    password: 123456
+    # 达梦8
+    #    driver-class-name: dm.jdbc.driver.DmDriver
+    #    url: jdbc:dm://localhost:5236/maku_generator?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+    #    username: maku_generator
+    #    password: 12345678
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  type-aliases-package: com.polymer.**.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    #使全局的映射器启用或禁用缓存
+    cache-enabled: true
+    #允许JDBC 支持自动生成主键
+    use-generated-keys: true
+    #配置默认的执行器.SIMPLE就是普通执行器;REUSE执行器会重用预处理语句(prepared statements);BATCH执行器将重用语句并执行批量更新
+    default-executor-type: SIMPLE
+    #开启驼峰映射
+    map-underscore-to-camel-case: true
+
+# PageHelper分页插件
+pagehelper:
+  #指定数据库方言，例如mysql
+  helper-dialect: mysql
+  #是否支持通过Mapper接口方法的参数来传递分页参数
+  support-methods-arguments: true
+  #设置为count=countSql可以防止SQL注入
+  params: count=countSql
+  #允许pageSize为0，即查询出全部结果
+  page-size-zero: true
